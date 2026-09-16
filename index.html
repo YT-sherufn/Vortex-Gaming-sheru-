@@ -1,5 +1,7 @@
 
 
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -155,6 +157,34 @@
             font-size: 13px;
         }
 
+
+        .game { cursor: pointer; }
+        .game:focus-visible { outline: 2px solid var(--purple); outline-offset: 3px; }
+        .detail-page {
+            display: none;
+            background: var(--card);
+            border: 1px solid #34344d;
+            border-radius: 16px;
+            padding: 28px;
+            max-width: 850px;
+            margin: 20px auto;
+        }
+        .detail-page h2 { color: var(--purple); font-size: clamp(26px, 4vw, 38px); }
+        .detail-page p { color: #ccccdd; line-height: 1.7; }
+        .detail-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 22px; }
+        .detail-actions a, .back-button {
+            display: inline-block;
+            background: #29213e;
+            color: white;
+            border: 1px solid #51406f;
+            border-radius: 10px;
+            padding: 12px 16px;
+            text-decoration: none;
+            font: inherit;
+            cursor: pointer;
+        }
+        .detail-actions a:hover, .back-button:hover { border-color: var(--purple); }
+
         @media (max-width: 500px) {
             .container {
                 padding: 20px 12px;
@@ -226,6 +256,17 @@
         <h2>😢 No games found</h2>
         <p>Try another search or choose a different filter.</p>
     </div>
+
+    <section class="detail-page" id="detailPage" aria-live="polite">
+        <button class="back-button" id="backButton" type="button">← Back to games</button>
+        <h2 id="detailTitle"></h2>
+        <p id="detailDescription"></p>
+        <p><strong>Genre:</strong> <span id="detailGenre"></span></p>
+        <p><strong>Platforms:</strong> <span id="detailPlatforms"></span></p>
+        <div class="detail-actions">
+            <a id="googleSearch" href="#" target="_blank" rel="noopener noreferrer">🔍 Search this game on Google</a>
+        </div>
+    </section>
 
 </main>
 
@@ -412,6 +453,20 @@ function renderGames() {
             tags.appendChild(tag);
         });
 
+        card.tabIndex = 0;
+        card.setAttribute("role", "link");
+        card.setAttribute("aria-label", "View details for " + game[0]);
+        const openDetails = () => {
+            location.hash = "game=" + encodeURIComponent(game[0]);
+            showGameDetails(game[0]);
+        };
+        card.addEventListener("click", openDetails);
+        card.addEventListener("keydown", event => {
+            if (event.key === "Enter" || event.key === " ") {
+                event.preventDefault();
+                openDetails();
+            }
+        });
         card.append(number, title, description, tags);
         gamesContainer.appendChild(card);
     });
@@ -422,11 +477,61 @@ function renderGames() {
     empty.style.display = filtered.length ? "none" : "block";
 }
 
+const detailPage = document.getElementById("detailPage");
+const detailTitle = document.getElementById("detailTitle");
+const detailDescription = document.getElementById("detailDescription");
+const detailGenre = document.getElementById("detailGenre");
+const detailPlatforms = document.getElementById("detailPlatforms");
+const googleSearch = document.getElementById("googleSearch");
+
+function showGameDetails(gameName) {
+    const game = games.find(item => item[0] === gameName);
+    if (!game) {
+        showGameList();
+        return;
+    }
+    detailTitle.textContent = game[0];
+    detailDescription.textContent = game[3];
+    detailGenre.textContent = game[1];
+    detailPlatforms.textContent = game[2];
+    googleSearch.href = "https://www.google.com/search?q=" + encodeURIComponent(game[0]);
+    document.querySelector(".controls").style.display = "none";
+    document.getElementById("count").style.display = "none";
+    gamesContainer.style.display = "none";
+    empty.style.display = "none";
+    detailPage.style.display = "block";
+    window.scrollTo(0, 0);
+}
+
+function showGameList() {
+    detailPage.style.display = "none";
+    document.querySelector(".controls").style.display = "flex";
+    document.getElementById("count").style.display = "block";
+    gamesContainer.style.display = "grid";
+    renderGames();
+}
+
+document.getElementById("backButton").addEventListener("click", () => {
+    history.pushState(null, "", location.pathname + location.search);
+    showGameList();
+});
+
+window.addEventListener("hashchange", () => {
+    const match = location.hash.match(/^#game=(.*)$/);
+    if (match) {
+        showGameDetails(decodeURIComponent(match[1]));
+    } else {
+        showGameList();
+    }
+});
+
 searchInput.addEventListener("input", renderGames);
 genreSelect.addEventListener("change", renderGames);
 platformSelect.addEventListener("change", renderGames);
 
 renderGames();
+const initialMatch = location.hash.match(/^#game=(.*)$/);
+if (initialMatch) showGameDetails(decodeURIComponent(initialMatch[1]));
 </script>
 
 </body>
