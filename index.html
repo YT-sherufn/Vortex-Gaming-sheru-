@@ -1,538 +1,363 @@
 
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>World of Games | Top 100 Games</title>
-
-    <style>
-        :root {
-            --bg: #090914;
-            --card: #171728;
-            --purple: #a77bff;
-            --pink: #ff2d75;
-            --text: #ffffff;
-            --muted: #b9b9cc;
-        }
-
-        * {
-            box-sizing: border-box;
-        }
-
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background: var(--bg);
-            color: var(--text);
-        }
-
-        header {
-            text-align: center;
-            padding: 55px 20px 45px;
-            background: linear-gradient(135deg, #5421c9, #c51e69);
-        }
-
-        header h1 {
-            font-size: clamp(32px, 6vw, 55px);
-            margin: 0 0 12px;
-        }
-
-        header p {
-            color: #f0eaff;
-            font-size: 17px;
-        }
-
-        .container {
-            max-width: 1400px;
-            margin: auto;
-            padding: 30px 20px;
-        }
-
-        .controls {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
-            margin-bottom: 25px;
-        }
-
-        input, select {
-            background: #171728;
-            color: white;
-            border: 1px solid #34344d;
-            border-radius: 10px;
-            padding: 14px;
-            font-size: 16px;
-            outline: none;
-        }
-
-        input {
-            flex: 1;
-            min-width: 200px;
-        }
-
-        select {
-            min-width: 170px;
-        }
-
-        input:focus, select:focus {
-            border-color: var(--purple);
-        }
-
-        .info {
-            color: var(--muted);
-            margin: 15px 0 25px;
-        }
-
-        .games {
-            display: grid;
-            grid-template-columns: repeat(
-                auto-fit, minmax(220px, 1fr)
-            );
-            gap: 20px;
-        }
-
-        .game {
-            background: var(--card);
-            border: 1px solid #292940;
-            border-radius: 15px;
-            padding: 22px;
-            transition: transform 0.2s, border-color 0.2s;
-            min-width: 0;
-        }
-
-        .game:hover {
-            transform: translateY(-5px);
-            border-color: var(--purple);
-        }
-
-        .game-number {
-            color: var(--pink);
-            font-size: 12px;
-            font-weight: bold;
-            letter-spacing: 1px;
-        }
-
-        .game h2 {
-            color: var(--purple);
-            font-size: 19px;
-            margin: 12px 0;
-        }
-
-        .game p {
-            color: #ccccdd;
-            line-height: 1.5;
-            font-size: 14px;
-        }
-
-        .tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 6px;
-            margin-top: 15px;
-        }
-
-        .tag {
-            background: #29213e;
-            color: #d6bfff;
-            border-radius: 20px;
-            padding: 6px 9px;
-            font-size: 11px;
-        }
-
-        .empty {
-            display: none;
-            text-align: center;
-            color: var(--muted);
-            padding: 50px 10px;
-        }
-
-        footer {
-            text-align: center;
-            padding: 35px 20px;
-            color: #88889f;
-            font-size: 13px;
-        }
-
-
-        .game { cursor: pointer; }
-        .game:focus-visible { outline: 2px solid var(--purple); outline-offset: 3px; }
-        .detail-page {
-            display: none;
-            background: var(--card);
-            border: 1px solid #34344d;
-            border-radius: 16px;
-            padding: 28px;
-            max-width: 850px;
-            margin: 20px auto;
-        }
-        .detail-page h2 { color: var(--purple); font-size: clamp(26px, 4vw, 38px); }
-        .detail-page p { color: #ccccdd; line-height: 1.7; }
-        .detail-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 22px; }
-        .detail-actions a, .back-button {
-            display: inline-block;
-            background: #29213e;
-            color: white;
-            border: 1px solid #51406f;
-            border-radius: 10px;
-            padding: 12px 16px;
-            text-decoration: none;
-            font: inherit;
-            cursor: pointer;
-        }
-        .detail-actions a:hover, .back-button:hover { border-color: var(--purple); }
-
-        @media (max-width: 500px) {
-            .container {
-                padding: 20px 12px;
-            }
-
-            .games {
-                grid-template-columns: 1fr;
-            }
-
-            select {
-                width: 100%;
-            }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>World of Games</title>
+<style>
+:root{--bg:#0b1020;--panel:#141c32;--panel2:#1c2743;--text:#f4f7ff;--muted:#aab6d3;--accent:#7c5cff;--accent2:#19d3c5}
+*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:radial-gradient(ellipse at top,#202b51 0%,var(--bg) 58%);color:var(--text);min-height:100vh}
+header{text-align:center;padding:48px 18px 28px}header .eyebrow{color:var(--accent2);font-weight:800;letter-spacing:.16em;text-transform:uppercase;font-size:.78rem}
+h1{font-size:clamp(2.3rem,7vw,4.7rem);margin:10px 0;background:linear-gradient(90deg,#fff,#bcb0ff,#64f0e5);background-clip:text;color:transparent}
+header p{color:var(--muted);max-width:650px;margin:0 auto;line-height:1.6}
+main{max-width:1180px;margin:auto;padding:0 18px 60px}
+.toolbar{position:sticky;top:0;z-index:5;background:#0b1020eF;backdrop-filter:blur(12px);padding:16px 0;display:grid;grid-template-columns:minmax(180px,1fr) auto;gap:12px}
+input,select{width:100%;padding:13px 15px;border:1px solid #344365;border-radius:12px;background:var(--panel);color:var(--text);font:inherit;outline:none}
+input:focus,select:focus{border-color:var(--accent2);box-shadow:0 0 0 3px #19d3c522}
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin:4px 0 20px}
+.filter{border:1px solid #344365;background:var(--panel);color:var(--muted);padding:9px 14px;border-radius:999px;cursor:pointer;font-weight:650}
+.filter.active,.filter:hover{background:var(--accent);border-color:var(--accent);color:white}
+.summary{display:flex;justify-content:space-between;gap:12px;align-items:center;color:var(--muted);font-size:.9rem;margin:12px 0 18px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(225px,1fr));gap:16px}
+.game{background:linear-gradient(145deg,var(--panel),#10172a);border:1px solid #293654;border-radius:18px;padding:18px;min-height:190px;display:flex;flex-direction:column;gap:12px;transition:transform .18s,border-color .18s,box-shadow .18s}
+.game:hover{transform:translateY(-4px);border-color:#7664ff;box-shadow:0 12px 30px #0004}
+.top{display:flex;justify-content:space-between;align-items:center;gap:8px}.emoji{font-size:2rem}.tag{font-size:.72rem;color:#bfb4ff;background:#7c5cff22;border:1px solid #7c5cff55;border-radius:999px;padding:5px 9px;white-space:nowrap}
+h2{font-size:1.08rem;margin:0}.desc{color:var(--muted);font-size:.88rem;line-height:1.5;margin:0;flex:1}
+.meta{display:flex;justify-content:space-between;align-items:center;color:#8f9dbd;font-size:.76rem;border-top:1px solid #293654;padding-top:11px}
+.empty{display:none;text-align:center;color:var(--muted);padding:50px 12px}
+footer{text-align:center;color:#7f8bab;font-size:.82rem;padding:22px}
+@media(max-width:620px){.toolbar{grid-template-columns:1fr}.summary{align-items:flex-start;flex-direction:column}}
+</style>
 </head>
-
 <body>
-
 <header>
-    <h1>🎮 World of Games</h1>
-    <p>Discover 100 famous games across PC, console, and mobile!</p>
+<div class="eyebrow">Discover • Explore • Play</div>
+<h1>World of Games</h1>
+<p>Your gaming universe in one place. Search games, browse genres, and discover something new to play.</p>
 </header>
-
-<main class="container">
-
-    <div class="controls">
-        <input
-            type="search"
-            id="search"
-            placeholder="🔍 Search games..."
-            aria-label="Search games"
-        >
-
-        <select id="genre" aria-label="Filter by genre">
-            <option value="All">All Genres</option>
-            <option value="Action">Action</option>
-            <option value="Adventure">Adventure</option>
-            <option value="RPG">RPG</option>
-            <option value="Shooter">Shooter</option>
-            <option value="Racing">Racing</option>
-            <option value="Sports">Sports</option>
-            <option value="Strategy">Strategy</option>
-            <option value="Sandbox">Sandbox</option>
-            <option value="Simulation">Simulation</option>
-            <option value="Horror">Horror</option>
-            <option value="Puzzle">Puzzle</option>
-            <option value="Battle Royale">Battle Royale</option>
-            <option value="MOBA">MOBA</option>
-            <option value="Fighting">Fighting</option>
-        </select>
-
-        <select id="platform" aria-label="Filter by platform">
-            <option value="All">All Platforms</option>
-            <option value="PC">PC</option>
-            <option value="PlayStation">PlayStation</option>
-            <option value="Xbox">Xbox</option>
-            <option value="Nintendo">Nintendo</option>
-            <option value="Mobile">Mobile</option>
-        </select>
-    </div>
-
-    <p class="info" id="count" aria-live="polite">
-        Loading games...
-    </p>
-
-    <div class="games" id="games"></div>
-
-    <div class="empty" id="empty">
-        <h2>😢 No games found</h2>
-        <p>Try another search or choose a different filter.</p>
-    </div>
-
-    <section class="detail-page" id="detailPage" aria-live="polite">
-        <button class="back-button" id="backButton" type="button">← Back to games</button>
-        <h2 id="detailTitle"></h2>
-        <p id="detailDescription"></p>
-        <p><strong>Genre:</strong> <span id="detailGenre"></span></p>
-        <p><strong>Platforms:</strong> <span id="detailPlatforms"></span></p>
-        <div class="detail-actions">
-            <a id="googleSearch" href="#" target="_blank" rel="noopener noreferrer">🔍 Search this game on Google</a>
-        </div>
-    </section>
-
+<main>
+<div class="toolbar">
+<input id="search" type="search" placeholder="🔎 Search games..." aria-label="Search games">
+<select id="sort" aria-label="Sort games"><option value="az">Sort: A–Z</option><option value="za">Sort: Z–A</option><option value="genre">Sort: Genre</option></select>
+</div>
+<div class="filters" id="filters"></div>
+<div class="summary"><span id="count" aria-live="polite"></span><span>100+ games • More games, more fun</span></div>
+<div class="grid" id="games"></div>
+<div class="empty" id="empty">No games found. Try another search or genre.</div>
 </main>
-
-<footer>
-    🎮 World of Games — Explore your next favorite game!
-</footer>
-
+<footer>Made for gamers ❤️ • World of Games</footer>
 <script>
 const games = [
-    // ACTION
-    ["Grand Theft Auto V","Action","PC, PlayStation, Xbox","Open-world crime and adventure."],
-    ["Red Dead Redemption 2","Adventure","PC, PlayStation, Xbox","Explore a huge Wild West world."],
-    ["God of War Ragnarök","Action","PlayStation, PC","Mythology, combat, and an epic journey."],
-    ["Marvel's Spider-Man 2","Action","PlayStation, PC","Swing through New York as Spider-Man."],
-    ["Ghost of Tsushima","Action","PlayStation, PC","Explore feudal Japan as a samurai."],
-    ["Elden Ring","RPG","PC, PlayStation, Xbox","Explore a vast fantasy world."],
-    ["Dark Souls III","RPG","PC, PlayStation, Xbox","Challenging fantasy action RPG."],
-    ["Sekiro: Shadows Die Twice","Action","PC, PlayStation, Xbox","Fast-paced shinobi combat."],
-    ["Devil May Cry 5","Action","PC, PlayStation, Xbox","Stylish demon-hunting action."],
-    ["Metal Gear Solid V","Action","PC, PlayStation, Xbox","Stealth missions in an open world."],
-
-    // ADVENTURE
-    ["The Legend of Zelda: Breath of the Wild","Adventure","Nintendo","Explore a massive fantasy world."],
-    ["The Legend of Zelda: Tears of the Kingdom","Adventure","Nintendo","Creative exploration and adventure."],
-    ["Uncharted 4: A Thief's End","Adventure","PlayStation, PC","A cinematic treasure-hunting adventure."],
-    ["Horizon Forbidden West","Adventure","PlayStation, PC","Explore a machine-filled future."],
-    ["The Witcher 3: Wild Hunt","RPG","PC, PlayStation, Xbox, Nintendo","A fantasy adventure full of quests."],
-    ["Assassin's Creed Valhalla","Action","PC, PlayStation, Xbox","Viking adventures and exploration."],
-    ["Tomb Raider (2013)","Adventure","PC, PlayStation, Xbox","Lara Croft's origin adventure."],
-    ["Hogwarts Legacy","Adventure","PC, PlayStation, Xbox, Nintendo","Explore a magical wizarding world."],
-    ["Final Fantasy VII Remake","RPG","PC, PlayStation","A modern reimagining of a classic RPG."],
-    ["Kingdom Hearts III","RPG","PlayStation, Xbox, Nintendo","Fantasy adventure with Disney worlds."],
-
-    // SHOOTERS
-    ["Call of Duty: Warzone","Shooter","PC, PlayStation, Xbox","Free-to-play battle royale shooter."],
-    ["Call of Duty: Black Ops 6","Shooter","PC, PlayStation, Xbox","Multiplayer and cinematic shooting."],
-    ["Counter-Strike 2","Shooter","PC","Competitive tactical team shooter."],
-    ["Valorant","Shooter","PC","Tactical shooting with unique agents."],
-    ["Overwatch 2","Shooter","PC, PlayStation, Xbox, Nintendo","Team-based hero shooter."],
-    ["Apex Legends","Battle Royale","PC, PlayStation, Xbox, Nintendo","Squad-based battle royale."],
-    ["Rainbow Six Siege","Shooter","PC, PlayStation, Xbox","Tactical team-based combat."],
-    ["DOOM Eternal","Shooter","PC, PlayStation, Xbox, Nintendo","Fast and intense demon-slaying action."],
-    ["Halo Infinite","Shooter","PC, Xbox","Sci-fi shooting and multiplayer."],
-    ["Destiny 2","Shooter","PC, PlayStation, Xbox","Sci-fi action with cooperative missions."],
-
-    // RACING
-    ["Forza Horizon 5","Racing","PC, Xbox, PlayStation","Open-world racing in Mexico."],
-    ["Forza Motorsport","Racing","PC, Xbox","Track racing and car simulation."],
-    ["Gran Turismo 7","Racing","PlayStation","Realistic driving and car collecting."],
-    ["Mario Kart 8 Deluxe","Racing","Nintendo","Colorful multiplayer kart racing."],
-    ["Need for Speed Heat","Racing","PC, PlayStation, Xbox","Street racing and car customization."],
-    ["Need for Speed Unbound","Racing","PC, PlayStation, Xbox","Stylish street racing."],
-    ["The Crew Motorfest","Racing","PC, PlayStation, Xbox","Explore an open-world racing festival."],
-    ["F1 25","Racing","PC, PlayStation, Xbox","Formula racing simulation."],
-    ["Rocket League","Sports","PC, PlayStation, Xbox, Nintendo","Soccer played with rocket-powered cars."],
-    ["Assetto Corsa","Racing","PC, PlayStation, Xbox","Realistic motorsport driving."],
-
-    // SPORTS
-    ["EA Sports FC 25","Sports","PC, PlayStation, Xbox, Nintendo","Football with clubs and national teams."],
-    ["eFootball","Sports","PC, PlayStation, Xbox, Mobile","Free-to-play football simulation."],
-    ["NBA 2K25","Sports","PC, PlayStation, Xbox, Nintendo","Basketball simulation."],
-    ["Madden NFL 25","Sports","PC, PlayStation, Xbox","American football simulation."],
-    ["WWE 2K25","Fighting","PC, PlayStation, Xbox","Professional wrestling action."],
-    ["EA Sports UFC 5","Fighting","PlayStation, Xbox","Mixed martial arts competition."],
-    ["MLB The Show 25","Sports","PlayStation, Xbox, Nintendo","Baseball simulation."],
-    ["Tony Hawk's Pro Skater 1 + 2","Sports","PC, PlayStation, Xbox, Nintendo","Classic skateboarding challenges."],
-    ["PGA Tour 2K25","Sports","PC, PlayStation, Xbox","Golf simulation and courses."],
-    ["Wii Sports","Sports","Nintendo","Accessible motion-based sports games."],
-
-    // SANDBOX & SURVIVAL
-    ["Minecraft","Sandbox","PC, PlayStation, Xbox, Nintendo, Mobile","Build, explore, and survive."],
-    ["Roblox","Sandbox","PC, Xbox, Mobile","Play and create experiences."],
-    ["Terraria","Sandbox","PC, PlayStation, Xbox, Nintendo, Mobile","2D crafting and exploration."],
-    ["The Sims 4","Simulation","PC, PlayStation, Xbox","Create people and build their lives."],
-    ["ARK: Survival Evolved","Survival","PC, PlayStation, Xbox, Nintendo, Mobile","Survive among dinosaurs."],
-    ["Rust","Survival","PC, PlayStation, Xbox","Survival, crafting, and multiplayer."],
-    ["Valheim","Survival","PC, Xbox","Viking survival and exploration."],
-    ["Palworld","Survival","PC, PlayStation, Xbox","Creature collecting and survival."],
-    ["Stardew Valley","Simulation","PC, PlayStation, Xbox, Nintendo, Mobile","Farming, friendships, and village life."],
-    ["Among Us","Social","PC, PlayStation, Xbox, Nintendo, Mobile","Find the impostor among your crew."],
-
-    // HORROR
-    ["Resident Evil 4","Horror","PC, PlayStation, Xbox","Survival horror and action."],
-    ["Resident Evil Village","Horror","PC, PlayStation, Xbox","A terrifying survival adventure."],
-    ["Resident Evil 2","Horror","PC, PlayStation, Xbox","Survive a zombie outbreak."],
-    ["Silent Hill 2","Horror","PC, PlayStation","Psychological survival horror."],
-    ["Dead by Daylight","Horror","PC, PlayStation, Xbox, Nintendo","Multiplayer survival horror."],
-    ["Phasmophobia","Horror","PC, PlayStation, Xbox","Investigate paranormal locations."],
-    ["Outlast","Horror","PC, PlayStation, Xbox, Nintendo","Escape a terrifying asylum."],
-    ["The Evil Within 2","Horror","PC, PlayStation, Xbox","Survive a twisted nightmare."],
-    ["Little Nightmares II","Horror","PC, PlayStation, Xbox, Nintendo","Creepy puzzle-platforming adventure."],
-    ["Five Nights at Freddy's","Horror","PC, PlayStation, Xbox, Nintendo, Mobile","Survive frightening animatronics."],
-
-    // MOBILE
-    ["PUBG Mobile","Battle Royale","Mobile","Battle royale combat on mobile."],
-    ["Free Fire","Battle Royale","Mobile","Fast-paced mobile battle royale."],
-    ["Call of Duty: Mobile","Shooter","Mobile","Mobile multiplayer and battle royale."],
-    ["Mobile Legends: Bang Bang","MOBA","Mobile","Five-versus-five mobile battles."],
-    ["League of Legends: Wild Rift","MOBA","Mobile","Mobile version of a famous MOBA."],
-    ["Clash of Clans","Strategy","Mobile","Build a village and battle others."],
-    ["Clash Royale","Strategy","Mobile","Real-time strategy card battles."],
-    ["Brawl Stars","Action","Mobile","Quick multiplayer battles."],
-    ["Genshin Impact","RPG","PC, PlayStation, Mobile","Explore a colorful fantasy world."],
-    ["Honkai: Star Rail","RPG","PC, PlayStation, Mobile","Turn-based sci-fi fantasy adventure."],
-
-    // STRATEGY & RPG
-    ["League of Legends","MOBA","PC","Competitive five-versus-five battles."],
-    ["Dota 2","MOBA","PC","Deep strategic team battles."],
-    ["StarCraft II","Strategy","PC","Real-time sci-fi strategy."],
-    ["Age of Empires II: Definitive Edition","Strategy","PC, Xbox","Build empires and lead armies."],
-    ["Civilization VI","Strategy","PC, PlayStation, Xbox, Nintendo, Mobile","Build a civilization through history."],
-    ["XCOM 2","Strategy","PC, PlayStation, Xbox, Nintendo","Turn-based tactical strategy."],
-    ["Baldur's Gate 3","RPG","PC, PlayStation, Xbox","Fantasy role-playing and choices."],
-    ["Diablo IV","RPG","PC, PlayStation, Xbox","Dark fantasy action RPG."],
-    ["World of Warcraft","RPG","PC","A massive online fantasy world."],
-    ["Monster Hunter: World","RPG","PC, PlayStation, Xbox","Hunt huge monsters with friends."],
-
-    // FIGHTING & PUZZLE
-    ["Street Fighter 6","Fighting","PC, PlayStation, Xbox","Competitive fighting game."],
-    ["Tekken 8","Fighting","PC, PlayStation, Xbox","3D martial arts combat."],
-    ["Mortal Kombat 1","Fighting","PC, PlayStation, Xbox, Nintendo","Fantasy martial arts battles."],
-    ["Super Smash Bros. Ultimate","Fighting","Nintendo","Crossover fighting with famous characters."],
-    ["Pokémon Scarlet","RPG","Nintendo","Explore a Pokémon world."],
-    ["Pokémon GO","Adventure","Mobile","Catch Pokémon in the real world."],
-    ["Candy Crush Saga","Puzzle","Mobile","Match colorful candies."],
-    ["Tetris","Puzzle","PC, PlayStation, Xbox, Nintendo, Mobile","Classic block-stacking puzzle game."],
-    ["The Witness","Puzzle","PC, PlayStation, Xbox, Nintendo","Solve puzzles on a mysterious island."],
-    ["Portal 2","Puzzle","PC, PlayStation, Xbox, Nintendo","Solve clever puzzles using portals."]["Fortnite","Battle Royale","PC, PlayStation, Xbox, Nintendo Switch, Mobile","Battle royale action with building and creative modes."],
-];
-
-const gamesContainer = document.getElementById("games");
-const searchInput = document.getElementById("search");
-const genreSelect = document.getElementById("genre");
-const platformSelect = document.getElementById("platform");
-const count = document.getElementById("count");
-const empty = document.getElementById("empty");
-
-function renderGames() {
-    const search = searchInput.value.toLowerCase().trim();
-    const genre = genreSelect.value;
-    const platform = platformSelect.value;
-
-    const filtered = games.filter(game => {
-        const matchesSearch =
-            game[0].toLowerCase().includes(search) ||
-            game[1].toLowerCase().includes(search) ||
-            game[3].toLowerCase().includes(search);
-
-        const matchesGenre =
-            genre === "All" || game[1] === genre;
-
-        const matchesPlatform =
-            platform === "All" ||
-            game[2].split(", ").includes(platform);
-
-        return matchesSearch && matchesGenre && matchesPlatform;
-    });
-
-    gamesContainer.innerHTML = "";
-
-    filtered.forEach(game => {
-        const originalNumber = games.indexOf(game) + 1;
-
-        const card = document.createElement("article");
-        card.className = "game";
-
-        const number = document.createElement("div");
-        number.className = "game-number";
-        number.textContent = "GAME #" + String(originalNumber).padStart(3, "0");
-
-        const title = document.createElement("h2");
-        title.textContent = game[0];
-
-        const description = document.createElement("p");
-        description.textContent = game[3];
-
-        const tags = document.createElement("div");
-        tags.className = "tags";
-
-        [game[1], ...game[2].split(", ")].forEach(label => {
-            const tag = document.createElement("span");
-            tag.className = "tag";
-            tag.textContent = label;
-            tags.appendChild(tag);
-        });
-
-        card.tabIndex = 0;
-        card.setAttribute("role", "link");
-        card.setAttribute("aria-label", "View details for " + game[0]);
-        const openDetails = () => {
-            location.hash = "game=" + encodeURIComponent(game[0]);
-            showGameDetails(game[0]);
-        };
-        card.addEventListener("click", openDetails);
-        card.addEventListener("keydown", event => {
-            if (event.key === "Enter" || event.key === " ") {
-                event.preventDefault();
-                openDetails();
-            }
-        });
-        card.append(number, title, description, tags);
-        gamesContainer.appendChild(card);
-    });
-
-    count.textContent =
-        `Showing ${filtered.length} of ${games.length} games`;
-
-    empty.style.display = filtered.length ? "none" : "block";
-}
-
-const detailPage = document.getElementById("detailPage");
-const detailTitle = document.getElementById("detailTitle");
-const detailDescription = document.getElementById("detailDescription");
-const detailGenre = document.getElementById("detailGenre");
-const detailPlatforms = document.getElementById("detailPlatforms");
-const googleSearch = document.getElementById("googleSearch");
-
-function showGameDetails(gameName) {
-    const game = games.find(item => item[0] === gameName);
-    if (!game) {
-        showGameList();
-        return;
-    }
-    detailTitle.textContent = game[0];
-    detailDescription.textContent = game[3];
-    detailGenre.textContent = game[1];
-    detailPlatforms.textContent = game[2];
-    googleSearch.href = "https://www.google.com/search?q=" + encodeURIComponent(game[0]);
-    document.querySelector(".controls").style.display = "none";
-    document.getElementById("count").style.display = "none";
-    gamesContainer.style.display = "none";
-    empty.style.display = "none";
-    detailPage.style.display = "block";
-    window.scrollTo(0, 0);
-}
-
-function showGameList() {
-    detailPage.style.display = "none";
-    document.querySelector(".controls").style.display = "flex";
-    document.getElementById("count").style.display = "block";
-    gamesContainer.style.display = "grid";
-    renderGames();
-}
-
-document.getElementById("backButton").addEventListener("click", () => {
-    history.pushState(null, "", location.pathname + location.search);
-    showGameList();
-});
-
-window.addEventListener("hashchange", () => {
-    const match = location.hash.match(/^#game=(.*)$/);
-    if (match) {
-        showGameDetails(decodeURIComponent(match[1]));
-    } else {
-        showGameList();
-    }
-});
-
-searchInput.addEventListener("input", renderGames);
-genreSelect.addEventListener("change", renderGames);
-platformSelect.addEventListener("change", renderGames);
-
-renderGames();
-const initialMatch = location.hash.match(/^#game=(.*)$/);
-if (initialMatch) showGameDetails(decodeURIComponent(initialMatch[1]));
+["Minecraft","Sandbox","⛏️","Build, explore, and survive in a world made of blocks."],
+["Fortnite","Battle Royale","🪂","Drop into the island, gather gear, and compete to be last standing."],
+["EA Sports FC 25","Sports","⚽","Play football matches, build a squad, and compete across modes."],
+["EA Sports FC 24","Sports","⚽","Football action with clubs, players, and career modes."],
+["FIFA 23","Sports","⚽","A football game featuring teams, tournaments, and career play."],
+["FIFA 22","Sports","⚽","Play football with teams and players from around the world."],
+["FIFA 21","Sports","⚽","Football matches, career mode, and online competition."],
+["FIFA 20","Sports","⚽","Football gameplay with club and international teams."],
+["FIFA 19","Sports","⚽","Football simulation with career and tournament modes."],
+["FIFA 18","Sports","⚽","Football action featuring clubs and international competition."],
+["Grand Theft Auto V","Action","🚗","Explore Los Santos in an open-world action adventure."],
+["Grand Theft Auto: San Andreas","Action","🌴","An open-world crime adventure across San Andreas."],
+["Red Dead Redemption 2","Adventure","🤠","Explore a vast western world in a story-driven adventure."],
+["The Witcher 3: Wild Hunt","RPG","🐺","Follow a monster hunter through a rich fantasy world."],
+["Elden Ring","RPG","💍","Explore the Lands Between in a challenging fantasy adventure."],
+["Dark Souls III","RPG","🔥","Battle formidable enemies in a dark fantasy world."],
+["Sekiro: Shadows Die Twice","Action","🗡️","Use stealth and precise swordplay in a samurai adventure."],
+["Hogwarts Legacy","Adventure","🪄","Experience a magical open-world adventure at Hogwarts."],
+["Cyberpunk 2077","RPG","🌆","Explore Night City in a futuristic role-playing adventure."],
+["The Elder Scrolls V: Skyrim","RPG","🐉","Explore a fantasy land filled with quests and dragons."],
+["Fallout 4","RPG","☢️","Survive and explore a post-apocalyptic wasteland."],
+["The Last of Us Part I","Adventure","🍄","A story-focused journey through a dangerous world."],
+["God of War (2018)","Action","🪓","Join Kratos and Atreus on a Norse mythological journey."],
+["God of War Ragnarök","Action","❄️","Continue the Norse saga with intense combat and exploration."],
+["Marvel's Spider-Man Remastered","Action","🕷️","Swing through New York and fight crime as Spider-Man."],
+["Marvel's Spider-Man: Miles Morales","Action","🕸️","Play as Miles in a superhero adventure across Harlem."],
+["Horizon Zero Dawn","Adventure","🏹","Hunt robotic creatures in a mysterious future."],
+["Horizon Forbidden West","Adventure","🌿","Explore new lands and face powerful machines."],
+["Uncharted 4: A Thief's End","Adventure","🧭","Join Nathan Drake on a cinematic treasure hunt."],
+["Tomb Raider (2013)","Adventure","🧗","Follow Lara Croft's origin story and survival adventure."],
+["Rise of the Tomb Raider","Adventure","❄️","Explore ancient sites and survive a dangerous expedition."],
+["Shadow of the Tomb Raider","Adventure","🌄","Solve tombs and uncover secrets in a jungle adventure."],
+["Assassin's Creed Valhalla","Action","🪓","Lead a Viking clan through a historical open world."],
+["Assassin's Creed Odyssey","RPG","🏛️","Explore ancient Greece in an expansive action RPG."],
+["Assassin's Creed Origins","Action","🏺","Discover the origins of the Assassin Brotherhood in Egypt."],
+["Far Cry 5","Action","🌲","Resist a dangerous cult in an open-world Montana setting."],
+["Far Cry 6","Action","🔥","Fight to liberate a fictional island nation."],
+["Rainbow Six Siege","Shooter","🎯","Team up for tactical, objective-based multiplayer battles."],
+["Call of Duty: Modern Warfare II","Shooter","💥","Play cinematic missions and competitive multiplayer."],
+["Call of Duty: Warzone","Battle Royale","🪖","Drop into a large-scale battle royale experience."],
+["Call of Duty: Black Ops Cold War","Shooter","🔫","Experience a Cold War campaign and multiplayer modes."],
+["Counter-Strike 2","Shooter","🎯","Compete in tactical, team-based first-person matches."],
+["Valorant","Shooter","✨","Combine precise gunplay with unique agent abilities."],
+["Apex Legends","Battle Royale","🚀","Choose a legend and compete in squad-based battles."],
+["Overwatch 2","Shooter","🦸","Team up as heroes in objective-driven combat."],
+["Dota 2","Strategy","🛡️","Battle in a strategic multiplayer online arena."],
+["League of Legends","Strategy","⚔️","Compete in a team-based strategy battle arena."],
+["Rocket League","Sports","🚙","Drive rocket-powered cars and score goals in soccer."],
+["Need for Speed Heat","Racing","🏎️","Race by day and evade the police by night."],
+["Forza Horizon 5","Racing","🏁","Race across a vibrant open-world Mexico."],
+["Forza Motorsport","Racing","🏎️","Compete on detailed tracks in a motorsport simulation."],
+["Gran Turismo 7","Racing","🏆","Collect cars and race on iconic circuits."],
+["Mario Kart 8 Deluxe","Racing","🍄","Race with familiar characters and creative tracks."],
+["Super Mario Odyssey","Platformer","🍄","Travel across imaginative kingdoms with Mario."],
+["Super Mario Bros. Wonder","Platformer","🌼","Enjoy inventive side-scrolling platforming adventures."],
+["The Legend of Zelda: Breath of the Wild","Adventure","🗡️","Explore a vast world with freedom and discovery."],
+["The Legend of Zelda: Tears of the Kingdom","Adventure","☁️","Build, explore, and solve puzzles across Hyrule."],
+["Animal Crossing: New Horizons","Simulation","🏝️","Create a peaceful island life at your own pace."],
+["Stardew Valley","Simulation","🌱","Farm, craft, build friendships, and explore caves."],
+["The Sims 4","Simulation","🏡","Create people, build homes, and shape their lives."],
+["Terraria","Sandbox","⛏️","Dig, build, craft, and fight through a 2D world."],
+["Roblox","Sandbox","🧱","Explore and create experiences across a huge game platform."],
+["Among Us","Party","👀","Find the impostor while completing tasks with friends."],
+["Fall Guys","Party","🫘","Race through colorful obstacle courses with other players."],
+["Overcooked! 2","Party","🍳","Cooperate in chaotic kitchens to serve meals on time."],
+["It Takes Two","Adventure","🧸","Team up in a co-op adventure built around teamwork."],
+["Portal 2","Puzzle","🌀","Solve clever physics puzzles using a portal device."],
+["Portal","Puzzle","🔵","Use portals and logic to escape a testing facility."],
+["Half-Life 2","Shooter","🔬","Fight through a sci-fi world in a story-driven shooter."],
+["Doom Eternal","Shooter","😈","Battle demons with fast, intense first-person combat."],
+["Resident Evil 4","Horror","🧟","Survive a tense horror adventure and rescue a captive."],
+["Resident Evil Village","Horror","🏰","Uncover a chilling mystery in a remote village."],
+["Silent Hill 2","Horror","🌫️","Explore a psychological horror story in a foggy town."],
+["Dead by Daylight","Horror","🪝","Survive as a team or hunt survivors in asymmetrical multiplayer."],
+["Phasmophobia","Horror","👻","Investigate haunted locations with friends."],
+["Subnautica","Survival","🌊","Explore an alien ocean and survive beneath the waves."],
+["The Forest","Survival","🌲","Gather resources and survive on a mysterious island."],
+["Sons of the Forest","Survival","🌳","Craft, build, and survive in a dangerous wilderness."],
+["ARK: Survival Evolved","Survival","🦖","Survive, craft, and tame dinosaurs in a prehistoric world."],
+["Rust","Survival","🪨","Gather resources and survive against other players."],
+["Sea of Thieves","Adventure","🏴‍☠️","Sail, explore, and search for treasure with a crew."],
+["No Man's Sky","Adventure","🪐","Explore a vast universe of planets and lifeforms."],
+["Mass Effect Legendary Edition","RPG","🚀","Lead a crew through an epic space role-playing trilogy."],
+["Dragon Age: Inquisition","RPG","🐉","Lead an Inquisition through a fantasy world in turmoil."],
+["Baldur's Gate 3","RPG","🎲","Shape an epic fantasy story through choices and turn-based battles."],
+["Diablo IV","RPG","👹","Battle demons and collect gear in a dark action RPG."],
+["Path of Exile","RPG","💀","Customize a hero and battle through a dark fantasy world."],
+["Genshin Impact","RPG","✨","Explore Teyvat and discover elemental powers and stories."],
+["Honkai: Star Rail","RPG","🚂","Travel among worlds in a turn-based sci-fi adventure."],
+["Final Fantasy VII Remake Intergrade","RPG","🌌","Revisit a classic fantasy story with action-focused combat."],
+["Final Fantasy XVI","RPG","🔥","Experience a dramatic fantasy tale with real-time battles."],
+["Persona 5 Royal","RPG","🎭","Balance daily life with stylish supernatural adventures."],
+["Monster Hunter: World","Action","🐲","Track and hunt massive monsters with friends."],
+["Street Fighter 6","Fighting","🥊","Compete in a modern fighting game with diverse fighters."],
+["Tekken 8","Fighting","👊","Battle in a 3D fighting series with a large roster."],
+["Mortal Kombat 1","Fighting","🐉","Fight with cinematic combat and signature finishing moves."],
+["Super Smash Bros. Ultimate","Fighting","⭐","Battle with characters from many gaming worlds."],
+["Cuphead","Platformer","☕","Take on challenging boss fights in hand-drawn cartoon style."],
+["Hollow Knight","Platformer","🪲","Explore a vast underground kingdom in a challenging action game."],
+["Celeste","Platformer","🏔️","Climb a mountain through precise platforming and a heartfelt story."],
+["Hades","Roguelike","🔥","Fight through the underworld in a fast-paced roguelike."],
+["Dead Cells","Roguelike","🗡️","Battle through changing levels with responsive action combat."],
+["Slay the Spire","Strategy","🃏","Build a card deck and climb a dangerous spire."],
+["Civilization VI","Strategy","🌍","Build an empire and guide it through the ages."],
+["Age of Empires II: Definitive Edition","Strategy","🏰","Gather resources and lead civilizations through historic battles."],
+["Plants vs. Zombies","Strategy","🌻","Defend your garden from waves of quirky zombies."],
+["Clash of Clans","Strategy","🏰","Build a village, train troops, and battle other clans."],
+["Candy Crush Saga","Puzzle","🍬","Match colorful candies through hundreds of puzzle levels."],
+["Tetris Effect: Connected","Puzzle","🧩","Play the classic block puzzle with immersive visuals and sound."],
+["The Witness","Puzzle","🧠","Solve environmental line puzzles on a mysterious island."],
+["Chess Ultra","Strategy","♟️","Play chess with elegant visuals and online opponents."],
+["Papers, Please","Simulation","🛂","Inspect documents and make difficult decisions at a border checkpoint."],
+["Euro Truck Simulator 2","Simulation","🚚","Drive trucks and deliver cargo across European roads."],
+["Microsoft Flight Simulator","Simulation","✈️","Fly aircraft and explore a detailed digital world."],
+["PowerWash Simulator","Simulation","🧽","Relax by cleaning objects and locations with a pressure washer."],
+["WWE 2K24","Sports","🤼","Play wrestling matches with a roster of WWE superstars."],
+["NBA 2K25","Sports","🏀","Play basketball, build a career, and compete with teams."],
+["Madden NFL 25","Sports","🏈","Play American football with teams and franchise modes."],
+["PGA Tour 2K23","Sports","⛳","Play golf on courses and compete in tournaments."],
+["Tony Hawk's Pro Skater 1 + 2","Sports","🛹","Skate through iconic parks and complete trick challenges."],
+["Just Dance 2024 Edition","Music","💃","Follow choreography and dance along to popular tracks."],
+["Beat Saber","Music","🎵","Slash flying blocks to the beat in a rhythm game."],
+["Geometry Dash","Platformer","🔺","Jump and fly through rhythm-based obstacle levels."],
+["Brawlhalla","Fighting","⚔️","Compete in platform-fighting matches with varied legends."],
+["Palworld","Survival","🐾","Capture creatures, craft bases, and explore an open world."],
+["Lethal Company","Horror","📡","Scavenge abandoned facilities with a crew while avoiding dangers."],
+["Helldivers 2","Shooter","🪖","Join cooperative missions against alien threats."],
+["The Finals","Shooter","🏆","Compete in team-based matches with destructible environments."],
+["PUBG: Battlegrounds","Battle Royale","🪂","Loot, survive, and outlast opponents on a shrinking battlefield."],
+["Team Fortress 2","Shooter","🎩","Choose a class and play objective-based team matches."],
+["Warframe","Action","🚀","Control powerful space ninjas in cooperative missions."],
+["Destiny 2","Shooter","🌌","Explore a sci-fi universe through missions and multiplayer activities."],
+["World of Warcraft","RPG","🐲","Explore Azeroth in a long-running online fantasy world."],
+["Final Fantasy XIV","RPG","🌙","Join an online fantasy adventure with quests and cooperative battles."],
+["The Elder Scrolls Online","RPG","📜","Explore Tamriel with friends in an online role-playing game."],
+["Sea of Stars","RPG","🌞","Travel through a colorful turn-based fantasy adventure."],
+["Ori and the Blind Forest","Platformer","🌳","Explore a beautiful forest through emotional platforming."],
+["Ori and the Will of the Wisps","Platformer","🦉","Continue Ori's journey through a stunning fantasy world."],
+["Limbo","Puzzle","⚫","Guide a child through a mysterious monochrome world."],
+["Inside","Puzzle","👁️","Uncover a dark mystery in a cinematic puzzle platformer."],
+["A Short Hike","Adventure","🐦","Explore a charming island and hike to its summit."],
+["Journey","Adventure","🏜️","Travel across a vast desert in a quiet, atmospheric adventure."],
+["Firewatch","Adventure","🌲","Explore a wilderness mystery through a park ranger's story."],
+["Detroit: Become Human","Adventure","🤖","Shape an interactive story through choices and consequences."],
+["Life is Strange","Adventure","📷","Make story-shaping choices in a narrative adventure."],
+["The Walking Dead: The Telltale Definitive Series","Adventure","🧟","Make difficult choices in a story-driven zombie adventure."],
+["A Plague Tale: Innocence","Adventure","🐀","Protect siblings through a perilous historical journey."],
+["A Plague Tale: Requiem","Adventure","🕯️","Continue a dramatic story of survival and family."],
+["Dying Light","Horror","🧟","Parkour through a zombie-filled city and survive after dark."],
+["Dying Light 2 Stay Human","Horror","🌆","Explore a dangerous city with parkour and survival choices."],
+["Days Gone","Action","🏍️","Survive a post-apocalyptic world on a motorcycle."],
+["Ghost of Tsushima","Action","🌸","Become a samurai defending Tsushima from invasion."],
+["Sifu","Action","🥋","Master martial arts in challenging close-quarters combat."],
+["Batman: Arkham Knight","Action","🦇","Protect Gotham with stealth, gadgets, and detective skills."],
+["Middle-earth: Shadow of Mordor","Action","💍","Fight through Mordor using stealth and a dynamic enemy system."],
+["Watch Dogs 2","Action","💻","Use hacking and stealth in an open-world San Francisco."],
+["Sleeping Dogs","Action","🐉","Go undercover in an open-world crime adventure in Hong Kong."],
+["Mafia: Definitive Edition","Action","🚘","Experience a story-driven organized-crime drama."],
+["L.A. Noire","Adventure","🕵️","Investigate crimes and question suspects in a detective story."],
+["Hitman: World of Assassination","Stealth","🎯","Plan creative approaches to missions as Agent 47."],
+["Metal Gear Solid V: The Phantom Pain","Stealth","🐍","Use stealth and tactics in expansive missions."],
+["XCOM 2","Strategy","👽","Lead a resistance force in turn-based tactical battles."],
+["Into the Breach","Strategy","🤖","Defend cities from giant creatures with tactical planning."],
+["Frostpunk","Strategy","❄️","Lead a society through a frozen survival crisis."],
+["Cities: Skylines","Simulation","🏙️","Design and manage a growing city."],
+["Planet Zoo","Simulation","🦁","Build and manage a detailed wildlife zoo."],
+["Two Point Hospital","Simulation","🏥","Design a hospital and treat unusual illnesses."],
+["Kerbal Space Program","Simulation","🚀","Build spacecraft and guide a quirky space program."],
+["Trackmania","Racing","🏁","Race on precision-focused tracks and chase faster times."],
+["The Crew Motorfest","Racing","🚗","Race through a festival of cars and driving events."],
+["F1 24","Racing","🏎️","Compete in Formula racing with teams and circuits."],
+["Wreckfest","Racing","🚧","Race and crash in demolition-focused motorsport events."],
+["Need for Speed Unbound","Racing","🎨","Race through a stylized city and build your street reputation."],
+["Sonic Mania","Platformer","💨","Race through classic-style Sonic platforming levels."],
+["Sonic Frontiers","Adventure","🦔","Explore open zones as Sonic in a high-speed adventure."],
+["Crash Bandicoot N. Sane Trilogy","Platformer","🌀","Play three remastered classic platforming adventures."],
+["Spyro Reignited Trilogy","Platformer","🐉","Explore colorful worlds and collect treasures as Spyro."],
+["Rayman Legends","Platformer","🎨","Enjoy imaginative co-op platforming and rhythm levels."],
+["Shovel Knight: Treasure Trove","Platformer","🛡️","Embark on retro-inspired platforming quests."],
+["The Binding of Isaac: Rebirth","Roguelike","👁️","Explore randomly generated dungeons in a dark roguelike."],
+["Vampire Survivors","Roguelike","🧛","Survive growing enemy swarms with automatic attacks."],
+["Risk of Rain 2","Roguelike","🌧️","Fight escalating alien threats in a cooperative roguelike."],
+["Don’t Starve Together","Survival","🔥","Work together to survive a strange, unforgiving wilderness."],
+["Grounded","Survival","🐜","Survive in a backyard where you have been shrunk tiny."],
+["Valheim","Survival","🪓","Explore a Norse-inspired world and build with friends."],
+["The Long Dark","Survival","❄️","Endure a harsh frozen wilderness in a survival experience."],
+["Project Zomboid","Survival","🧟","Manage resources and survive a detailed zombie apocalypse."],
+["7 Days to Die","Survival","🧱","Craft, build, and defend against waves of undead."],
+["The Sims 3","Simulation","🏠","Create Sims and guide their lives in an open neighborhood."],
+["House Flipper","Simulation","🛠️","Renovate homes and turn neglected properties into dream spaces."],
+["Farming Simulator 22","Simulation","🚜","Manage a farm, operate machinery, and grow crops."],
+["Car Mechanic Simulator 2021","Simulation","🔧","Repair, restore, and customize vehicles."],
+["Unpacking","Puzzle","📦","Unpack belongings and discover a story through objects."],
+["Human: Fall Flat","Puzzle","🧍","Solve physics-based puzzles with wobbly characters."],
+["The Talos Principle","Puzzle","🤖","Solve philosophical puzzles in ancient-looking environments."],
+["Baba Is You","Puzzle","🧩","Change the rules of each level to solve puzzles."],
+["Keep Talking and Nobody Explodes","Party","💣","Communicate with teammates to defuse a puzzle-filled bomb."],
+["Jackbox Party Pack 10","Party","🎉","Play a collection of social party games with friends."],
+["Golf With Your Friends","Sports","⛳","Play whimsical mini-golf courses with friends."],
+["Wii Sports","Sports","🎾","Enjoy accessible sports mini-games including tennis and bowling."],
+["Puyo Puyo Tetris 2","Puzzle","🟦","Compete in a colorful crossover of two puzzle classics."],
+["Plants vs. Zombies: Garden Warfare 2","Shooter","🌻","Battle as plants or zombies in colorful team combat."],
+["Paladins","Shooter","🛡️","Choose champions and compete in objective-based team battles."],
+["Smite","Action","⚡","Battle in a mythology-inspired third-person arena."],
+["War Thunder","Simulation","✈️","Pilot aircraft and command vehicles in military battles."],
+["World of Tanks","Action","🛡️","Command armored vehicles in team-based tank battles."],
+["Star Wars Jedi: Fallen Order","Action","🌟","Use lightsaber combat and Force abilities in a Star Wars adventure."],
+["Star Wars Jedi: Survivor","Action","🌟","Continue a Jedi's journey through exploration and combat."],
+["Marvel's Guardians of the Galaxy","Adventure","🚀","Lead the Guardians through a cinematic cosmic adventure."],
+["Immortals Fenyx Rising","Adventure","🏛️","Explore a myth-inspired world and battle legendary creatures."],
+["Kena: Bridge of Spirits","Adventure","🌺","Guide Kena through a beautiful spirit-filled adventure."],
+["Stray","Adventure","🐈","Explore a neon-lit city as a lost cat."],
+["Sackboy: A Big Adventure","Platformer","🧵","Play a colorful platforming adventure solo or with friends."],
+["Little Nightmares II","Horror","📺","Escape eerie environments in a suspenseful puzzle adventure."],
+["Amnesia: The Dark Descent","Horror","🕯️","Survive a first-person psychological horror experience."],
+["Outlast","Horror","📹","Investigate a disturbing facility with only a camera."],
+["The Evil Within 2","Horror","🩸","Search a twisted world in a survival horror story."],
+["Alan Wake 2","Horror","🔦","Unravel a supernatural mystery through survival horror."],
+["Control","Action","🌀","Use supernatural abilities inside a mysterious government building."],
+["Quantum Break","Action","⏱️","Fight through a time-bending action adventure."],
+["Remnant II","Action","🔫","Battle strange worlds in a challenging co-op action game."],
+["It Takes Two","Adventure","🧸","Team up in a co-op adventure built around teamwork."],
+["A Way Out","Adventure","🔓","Play a cooperative story about two prisoners escaping."],
+["Payday 2","Shooter","💰","Plan and carry out cooperative heists."],
+["Left 4 Dead 2","Shooter","🧟","Team up to survive intense zombie campaigns."],
+["Back 4 Blood","Shooter","🧟","Fight through cooperative missions against infected enemies."],
+["Borderlands 3","Shooter","🔫","Explore a comic-styled world full of loot and action."],
+["Tiny Tina's Wonderlands","RPG","🎲","Play a fantasy adventure inspired by tabletop role-playing."],
+["The Outer Worlds","RPG","🪐","Explore a corporate-controlled space colony through player choices."],
+["Outer Wilds","Adventure","🪐","Uncover a solar system's mysteries in an exploration adventure."],
+["Disco Elysium","RPG","🕵️","Investigate a murder through dialogue, choices, and role-playing."],
+["Undertale","RPG","❤️","Explore a quirky underground world where choices matter."],
+["Deltarune","RPG","⭐","Join a story-driven adventure with turn-based battles."],
+["Omori","RPG","🌻","Explore a surreal world in a psychological role-playing story."],
+["Dave the Diver","Adventure","🐟","Dive for fish by day and run a sushi restaurant at night."],
+["Cult of the Lamb","Roguelike","🐑","Build a cult and explore dungeons in a darkly cute adventure."],
+["Inscryption","Strategy","🃏","Uncover secrets through a strange deck-building card game."],
+["Balatro","Strategy","🃏","Build powerful poker hands in a roguelike deck-building game."],
+["Marvel Snap","Strategy","🦸","Play quick strategic card battles with Marvel characters."],
+["Hearthstone","Strategy","🃏","Build decks and compete in a fantasy digital card game."],
+["Teamfight Tactics","Strategy","♟️","Build a team of champions and out-strategize opponents."],
+["Age of Empires IV","Strategy","🏰","Build an empire and command armies across history."],
+["StarCraft II","Strategy","🚀","Command factions in a science-fiction real-time strategy game."],
+["Command & Conquer: Red Alert 2","Strategy","☢️","Lead forces in a classic alternate-history strategy battle."],
+["Total War: Warhammer III","Strategy","🐲","Command armies and empires in a fantasy strategy epic."],
+["Mount & Blade II: Bannerlord","RPG","⚔️","Build a clan and fight large-scale medieval battles."],
+["Kingdom Come: Deliverance","RPG","🏰","Experience a grounded medieval role-playing adventure."],
+["Kingdom Come: Deliverance II","RPG","🛡️","Continue a medieval story of choices, exploration, and combat."],
+["Dragon's Dogma 2","RPG","🐉","Explore a fantasy world with action combat and companions."],
+["Like a Dragon: Infinite Wealth","RPG","🌴","Join a story-rich role-playing adventure with turn-based combat."],
+["Yakuza 0","Action","🐉","Experience a crime drama set in 1980s Japan."],
+["Yakuza: Like a Dragon","RPG","🎲","Follow a new hero in a story-driven RPG."],
+["Persona 4 Golden","RPG","📺","Solve a mystery and build friendships in a Japanese town."],
+["Persona 3 Reload","RPG","🌙","Face supernatural threats while balancing student life."],
+["NieR: Automata","Action","🤖","Explore a philosophical sci-fi action adventure."],
+["Bayonetta","Action","🕶️","Battle supernatural enemies with stylish action combat."],
+["Devil May Cry 5","Action","😈","Fight demons with fast, combo-focused action."],
+["Nioh 2","Action","👹","Master challenging samurai combat in a supernatural setting."],
+["Lies of P","Action","🤥","Fight through a dark fantasy inspired by Pinocchio."],
+["Armored Core VI: Fires of Rubicon","Action","🤖","Customize a mech and battle through intense missions."],
+["Granblue Fantasy: Relink","RPG","☁️","Embark on a colorful action RPG adventure with a party."],
+["Sea of Stars","RPG","🌞","Travel through a colorful turn-based fantasy adventure."],
+["Chained Echoes","RPG","🐉","Explore a retro-inspired fantasy RPG with turn-based battles."],
+["Octopath Traveler II","RPG","🧳","Follow eight characters in a richly styled role-playing adventure."],
+["Triangle Strategy","Strategy","♟️","Make difficult choices in a tactical fantasy strategy story."],
+["Fire Emblem: Three Houses","Strategy","🏰","Lead students and command tactical battles in a fantasy academy."],
+["Xenoblade Chronicles 3","RPG","⚔️","Explore a vast world in a story-driven role-playing game."],
+["Pokémon Scarlet","Adventure","🐉","Explore a region, catch Pokémon, and battle trainers."],
+["Pokémon Violet","Adventure","🐉","Discover a region and build a team of Pokémon."],
+["Pokémon Legends: Arceus","Adventure","🔴","Explore an earlier era of Pokémon history."],
+["Splatoon 3","Shooter","🦑","Cover arenas in ink in colorful team-based matches."],
+["Kirby and the Forgotten Land","Platformer","⭐","Explore 3D stages and inhale abilities as Kirby."],
+["Metroid Dread","Action","🚀","Explore an alien planet in a tense sci-fi adventure."],
+["Donkey Kong Country: Tropical Freeze","Platformer","🍌","Play challenging side-scrolling levels as Donkey Kong."],
+["Luigi's Mansion 3","Adventure","👻","Explore a haunted hotel and capture mischievous ghosts."],
+["Pikmin 4","Strategy","🌱","Guide tiny creatures through exploration and puzzle challenges."],
+["Fallout: New Vegas","RPG","☢️","Navigate factions and choices in a post-apocalyptic desert."],
+["Bioshock Infinite","Shooter","🎈","Explore a floating city in a story-driven first-person adventure."],
+["BioShock","Shooter","🌊","Uncover a mystery in the underwater city of Rapture."],
+["Prey (2017)","Shooter","👽","Survive aboard a space station filled with alien threats."],
+["Dishonored 2","Stealth","🐀","Use stealth and supernatural powers in a detailed immersive world."],
+["Thief","Stealth","🗝️","Sneak through shadows and steal valuables in a fantasy city."],
+["Deus Ex: Human Revolution","RPG","🤖","Investigate conspiracies in a cyberpunk role-playing adventure."],
+["Mirror's Edge","Action","🏙️","Run, jump, and move across rooftops in a first-person parkour game."],
+["Burnout Paradise Remastered","Racing","🚗","Race freely through a city built for high-speed driving."],
+["DiRT Rally 2.0","Racing","🏁","Master demanding rally stages and changing road conditions."],
+["SnowRunner","Simulation","🚚","Drive heavy vehicles through challenging off-road terrain."],
+["Farming Simulator 25","Simulation","🚜","Grow crops and manage a modern farming operation."],
+["Planet Coaster","Simulation","🎢","Design and manage your own theme park."],
+["RollerCoaster Tycoon Classic","Simulation","🎢","Build roller coasters and run a theme park."],
+["Football Manager 2024","Sports","📋","Manage a football club, tactics, transfers, and training."],
+["eFootball","Sports","⚽","Play digital football matches with teams and players."],
+["WWE 2K23","Sports","🤼","Create matches and compete in professional wrestling."],
+["NHL 24","Sports","🏒","Play ice hockey with teams and competitive modes."],
+["UFC 5","Sports","🥊","Compete in mixed martial arts bouts."],
+["EA Sports FC 26","Sports","⚽","Play football with updated teams and modes."],
+["FIFA 17","Sports","⚽","Football simulation with story and career modes."],
+["FIFA 16","Sports","⚽","Play football matches with clubs and national teams."],
+["FIFA 15","Sports","⚽","Football gameplay with career and tournament options."],
+["FIFA 14","Sports","⚽","Play football with club teams and international sides."],
+["FIFA 13","Sports","⚽","Classic football gameplay with career and online modes."]
+].map((g,i)=>({name:g[0],genre:g[1],emoji:g[2],desc:g[3],year:i<100?2026:2025}));
+const uniqueGames = [...new Map(games.map(g=>[g.name,g])).values()];
+const genres=["All",...new Set(uniqueGames.map(g=>g.genre))];
+let active="All";
+const filterBox=document.getElementById("filters");
+genres.forEach(genre=>{const b=document.createElement("button");b.className="filter"+(genre==="All"?" active":"");b.textContent=genre;b.type="button";b.onclick=()=>{active=genre;document.querySelectorAll(".filter").forEach(x=>x.classList.toggle("active",x===b));render()};filterBox.appendChild(b)});
+function render(){const q=document.getElementById("search").value.trim().toLowerCase();const sort=document.getElementById("sort").value;let shown=uniqueGames.filter(g=>(active==="All"||g.genre===active)&&(g.name.toLowerCase().includes(q)||g.genre.toLowerCase().includes(q)||g.desc.toLowerCase().includes(q)));shown.sort((a,b)=>sort==="za"?b.name.localeCompare(a.name):sort==="genre"?a.genre.localeCompare(b.genre)||a.name.localeCompare(b.name):a.name.localeCompare(b.name));const root=document.getElementById("games");root.innerHTML="";shown.forEach(g=>{const card=document.createElement("article");card.className="game";card.innerHTML=`<div class="top"><span class="emoji" aria-hidden="true">${g.emoji}</span><span class="tag">${g.genre}</span></div><h2></h2><p class="desc"></p><div class="meta"><span>World of Games</span><span>Game</span></div>`;card.querySelector("h2").textContent=g.name;card.querySelector(".desc").textContent=g.desc;root.appendChild(card)});document.getElementById("count").textContent=`Showing ${shown.length} of ${uniqueGames.length} games`;document.getElementById("empty").style.display=shown.length?"none":"block"}
+document.getElementById("search").addEventListener("input",render);document.getElementById("sort").addEventListener("change",render);render();
 </script>
-
 </body>
 </html>
