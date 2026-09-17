@@ -1,71 +1,936 @@
 
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Vortex Gaming — Games</title>
+
 <style>
-:root{--bg:#0b1020;--panel:#121a2b;--muted:#969b93;--text:#f4f3ed;--lime:#a78bfa;--line:#30332e}
-*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 80% 0%,#1e1b4b 0,transparent 38%),var(--bg);color:var(--text);font:15px/1.45 Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,sans-serif}
-header{border-bottom:1px solid var(--line);position:sticky;top:0;background:#0b1020ed;backdrop-filter:blur(14px);z-index:5}
-.nav{max-width:1240px;margin:auto;padding:18px 24px;display:flex;align-items:center;justify-content:space-between;gap:20px}
-.brand{font-weight:950;letter-spacing:-1.8px;font-size:25px}.brand span{color:var(--lime)}.tag{font-size:11px;color:var(--muted);letter-spacing:2px;text-transform:uppercase}
-.hero{max-width:1240px;margin:auto;padding:58px 24px 32px;display:grid;grid-template-columns:1.2fr .8fr;gap:30px;align-items:end}
-.kicker{color:var(--lime);font-size:11px;letter-spacing:2.3px;font-weight:800;text-transform:uppercase}
-h1{font-size:clamp(42px,7vw,82px);line-height:.93;letter-spacing:-5px;margin:15px 0 18px;font-weight:950}h1 em{font-style:normal;color:var(--lime)}
-.hero p{color:#aeb2aa;max-width:520px;margin:0;font-size:16px}
-.hero-note{border:1px solid #383c33;border-radius:16px;padding:22px;background:linear-gradient(135deg,#22251e,#151714);min-height:130px;display:flex;flex-direction:column;justify-content:space-between}
-.hero-note strong{font-size:29px;letter-spacing:-1px}.hero-note small{color:var(--muted)}
-.controls{max-width:1240px;margin:0 auto;padding:16px 24px 24px;display:flex;gap:10px;flex-wrap:wrap;align-items:center}
-input,select{background:#121a2b;border:1px solid #353a31;color:var(--text);padding:13px 15px;border-radius:10px;font:inherit;outline:none}input{flex:1;min-width:200px}input:focus,select:focus{border-color:var(--lime)}.count{color:var(--muted);font-size:13px;margin-left:auto}
-main{max-width:1240px;margin:auto;padding:0 24px 60px}.sectionhead{display:flex;justify-content:space-between;align-items:center;margin:4px 0 18px}.sectionhead h2{font-size:17px;letter-spacing:-.4px;margin:0}.sectionhead span{color:var(--muted);font-size:12px}
-.grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:13px}
-.game{background:var(--panel);border:1px solid #292c27;border-radius:13px;overflow:hidden;cursor:pointer;transition:transform .18s,border-color .18s;min-width:0}.game:hover{transform:translateY(-4px);border-color:#737d4b}
-.art{height:132px;position:relative;display:flex;align-items:center;justify-content:center;padding:16px;text-align:center;overflow:hidden;background:radial-gradient(ellipse at 20% 20%,var(--glow),transparent 60%),linear-gradient(135deg,#252a22,#141613)}
-.art:before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(135deg,transparent 0 18px,#ffffff05 19px 20px)}.mark{position:relative;font-size:clamp(15px,1.5vw,23px);font-weight:1000;line-height:1.02;letter-spacing:-1px;text-shadow:0 3px 20px #000;max-width:100%;overflow-wrap:anywhere}.num{position:absolute;top:10px;left:11px;font-size:10px;color:#c9cec2;letter-spacing:1px}.platform{position:absolute;bottom:10px;right:11px;color:#c9cec2;font-size:9px;letter-spacing:1px;text-transform:uppercase}
-.info{padding:12px 13px 14px}.info h3{margin:0 0 5px;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.info p{margin:0;color:var(--muted);font-size:11px}
-footer{border-top:1px solid var(--line);padding:25px 24px;color:#7e837a;font-size:12px;text-align:center}
-.overlay{display:none;position:fixed;inset:0;background:#000b;z-index:10;align-items:center;justify-content:center;padding:20px}.overlay.show{display:flex}.modal{max-width:560px;width:100%;background:#191b18;border:1px solid #41463a;border-radius:18px;overflow:hidden;box-shadow:0 25px 100px #0009}.modalart{height:210px;display:grid;place-items:center;text-align:center;padding:30px;background:radial-gradient(ellipse at 30% 20%,var(--glow),transparent 65%),#20231e}.modalart b{font-size:clamp(30px,6vw,52px);font-weight:1000;letter-spacing:-2px;line-height:1}.modalbody{padding:23px}.modalbody h2{margin:0 0 6px;font-size:26px;letter-spacing:-1px}.modalbody p{color:#aeb2aa}.actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:20px}a,.close{text-decoration:none;border:1px solid #44483e;color:var(--text);padding:11px 14px;border-radius:9px;font-weight:700;font-size:12px}a.primary{background:var(--lime);color:#14160e;border-color:var(--lime)}.close{background:transparent;cursor:pointer}
-@media(max-width:950px){.grid{grid-template-columns:repeat(4,minmax(0,1fr))}}@media(max-width:680px){.hero{grid-template-columns:1fr;padding-top:38px}h1{letter-spacing:-3px}.hero-note{min-height:100px}.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.art{height:125px}.count{width:100%;margin:0}.nav{padding:15px 18px}main,.controls,.hero{padding-left:18px;padding-right:18px}}
-</style></head><body>
-<div class="brand">Vortex <span>Gaming(sheru)</span></div>
-<section class="hero"><div><div class="kicker">The game shelf / 2026</div><h1>Less scrolling.<br><em>More playing.</em></h1><p>A clean, no-nonsense game directory. Find something to play, check it out, and get straight to the official page.</p></div><div class="hero-note"><small>THE COLLECTION</small><strong>200 games. One place.</strong><small>Search the library and open any title for links.</small></div></section>
-<div class="controls"><input id="search" placeholder="Search games…" aria-label="Search games"><select id="sort"><option value="az">A–Z</option><option value="za">Z–A</option></select><span class="count" id="count"></span></div>
-<main><div class="sectionhead"><h2>Browse the library</h2><span>Tap a game for details ↗</span></div><div class="grid" id="grid"></div></main>
-<footer>PLAYROOM is an independent fan-made directory and is not affiliated with any game publisher. Game names and trademarks belong to their respective owners.</footer>
-<div class="overlay" id="overlay"><div class="modal"><div class="modalart" id="modalart"><b id="modalmark"></b></div><div class="modalbody"><h2 id="modalname"></h2><p id="modaldesc"></p><div class="actions"><a class="primary" id="official" target="_blank" rel="noopener">Find official website ↗</a><a id="play" target="_blank" rel="noopener">Find where to play ↗</a><button class="close" id="close">Close</button></div></div></div></div>
-<script>
-const games=["Minecraft", "Fortnite", "EA Sports FC 25", "EA Sports FC 24", "FIFA 23", "FIFA 22", "FIFA 21", "FIFA 20", "FIFA 19", "FIFA 18", "Grand Theft Auto V", "Grand Theft Auto: San Andreas", "Red Dead Redemption 2", "The Witcher 3: Wild Hunt", "Elden Ring", "Dark Souls III", "Sekiro: Shadows Die Twice", "Hogwarts Legacy", "Cyberpunk 2077", "The Elder Scrolls V: Skyrim", "Fallout 4", "The Last of Us Part I", "God of War (2018)", "God of War Ragnarök", "Marvel", ", ", "s Spider-Man: Miles Morales", "Horizon Zero Dawn", "Horizon Forbidden West", "Uncharted 4: A Thief", "s Creed Valhalla", "Assassin", "s Creed Origins", "Far Cry 5", "Far Cry 6", "Rainbow Six Siege", "Call of Duty: Modern Warfare II", "Call of Duty: Warzone", "Call of Duty: Black Ops Cold War", "Counter-Strike 2", "Valorant", "Apex Legends", "Overwatch 2", "Dota 2", "League of Legends", "Rocket League", "Need for Speed Heat", "Forza Horizon 5", "Forza Motorsport", "Gran Turismo 7", "Mario Kart 8 Deluxe", "Super Mario Odyssey", "Super Mario Bros. Wonder", "The Legend of Zelda: Breath of the Wild", "The Legend of Zelda: Tears of the Kingdom", "Animal Crossing: New Horizons", "Stardew Valley", "The Sims 4", "Terraria", "Roblox", "Among Us", "Fall Guys", "Overcooked! 2", "It Takes Two", "Portal 2", "Portal", "Half-Life 2", "Doom Eternal", "Resident Evil 4", "Resident Evil Village", "Silent Hill 2", "Dead by Daylight", "Phasmophobia", "Subnautica", "The Forest", "Sons of the Forest", "ARK: Survival Evolved", "Rust", "Sea of Thieves", "No Man", "s Gate 3", "Diablo IV", "Path of Exile", "Genshin Impact", "Honkai: Star Rail", "Final Fantasy VII Remake Intergrade", "Final Fantasy XVI", "Persona 5 Royal", "Monster Hunter: World", "Street Fighter 6", "Tekken 8", "Mortal Kombat 1", "Super Smash Bros. Ultimate", "Cuphead", "Hollow Knight", "Celeste", "Hades", "Dead Cells", "Slay the Spire", "Civilization VI", "Age of Empires II: Definitive Edition", "Plants vs. Zombies", "Clash of Clans", "Candy Crush Saga", "Tetris Effect: Connected", "The Witness", "Chess Ultra", "Papers, Please", "Euro Truck Simulator 2", "Microsoft Flight Simulator", "PowerWash Simulator", "WWE 2K24", "NBA 2K25", "Madden NFL 25", "PGA Tour 2K23", "Tony Hawk", "t Starve Together", "Grounded", "Valheim", "The Long Dark", "Project Zomboid", "7 Days to Die", "House Flipper", "Farming Simulator 22", "Car Mechanic Simulator 2021", "Unpacking", "Human: Fall Flat", "The Talos Principle", "Baba Is You", "Keep Talking and Nobody Explodes", "Jackbox Party Pack 10", "Golf With Your Friends", "Puyo Puyo Tetris 2", "Plants vs. Zombies: Garden Warfare 2"];
-const colors=['#a78bfa','#38bdf8','#f472b6','#fbbf24','#34d399','#fb7185','#818cf8'];
-const mottos=['Queue up. Your next favorite is waiting.','One more round? Make it a good one.','Take a break when you need it—then jump back in.','Every great run starts with pressing play.','Explore something new today.','Play your way. Enjoy the ride.','Small wins count. Keep having fun.','Your next adventure is one click away.'];
-let mottoIndex=0;setInterval(()=>{{mottoIndex=(mottoIndex+1)%mottos.length;const el=document.getElementById('motto');el.style.opacity=0;setTimeout(()=>{{el.textContent=mottos[mottoIndex];el.style.opacity=1}},250)}},10000);
-const grid=document.getElementById('grid'),search=document.getElementById('search'),sort=document.getElementById('sort'),count=document.getElementById('count');
-function gameLine(g){
- const low=g.toLowerCase();
- const lines=[
-  [/roblox/,"Build worlds, discover experiences, and play with friends."],
-  [/minecraft/,"Mine, craft, explore, and make the world your own."],
-  [/fortnite/,"Drop in, gear up, and chase that Victory Royale."],
-  [/grand theft auto|\bgta\b/,"Explore an open world packed with missions and mayhem."],
-  [/call of duty|\bcod\b/,"Jump into action, sharpen your aim, and play the objective."],
-  [/among us/,"Read the room, finish tasks, and figure out who’s sus."],
-  [/rocket league/,"Boost, fly, and send the ball into the net."],
-  [/valorant/,"Team tactics, precise aim, and clutch-round energy."],
-  [/league of legends/,"Pick your champion, work with your team, and push the lanes."],
-  [/apex legends/,"Squad up, loot smart, and fight to be the last team standing."],
-  [/stardew/,"Slow down, grow your farm, and make a little life."],
-  [/the sims/,"Create characters, shape their stories, and build a home."],
-  [/overwatch/,"Choose a hero, coordinate with your team, and make the play."],
-  [/terraria/,"Dig deep, craft gear, and see what waits beyond the next cave."],
-  [/fall guys/,"Race through chaotic courses and try not to tumble."],
- ];
- for(const [re,txt] of lines) if(re.test(low)) return txt;
- const options=[
-  "Discover its world, learn the rhythm, and make your own run.",
-  "Jump in, explore the mechanics, and see how far you can go.",
-  "A new challenge to master—and a new favorite waiting to happen.",
-  "Pick your style, find your flow, and enjoy the adventure."
- ];
- return options[(g.length + g.charCodeAt(0))%options.length];
+:root {
+  --bg: #0b1020;
+  --panel: #121a2b;
+  --muted: #969b93;
+  --text: #f4f3ed;
+  --lime: #a78bfa;
+  --line: #30332e;
 }
-function render(){let q=search.value.toLowerCase();let list=games.filter(g=>g.toLowerCase().includes(q)).sort((a,b)=>a.localeCompare(b));if(sort.value==='za')list.reverse();count.textContent=list.length+' titles';grid.innerHTML=list.map(g=>{let i=games.indexOf(g),c=colors[i%colors.length];return `<article class="game" data-name="${g.replaceAll('&','&amp;').replaceAll('"','&quot;')}" style="--glow:${c}"><div class="art"><span class="num">${String(i+1).padStart(3,'0')}</span><div class="mark">${g}</div><span class="platform">GAME FILE</span></div><div class="info"><h3>${g}</h3><p>${gameLine(g)}</p></div></article>`}).join('');}
-grid.addEventListener('click',e=>{let card=e.target.closest('.game');if(!card)return;let g=card.dataset.name;document.getElementById('modalname').textContent=g;document.getElementById('modaldesc').textContent=gameLine(g);document.getElementById('modalmark').textContent=g;document.getElementById('official').href='https://www.google.com/search?q='+encodeURIComponent(g+' official website');document.getElementById('play').href='https://www.google.com/search?q='+encodeURIComponent(g+' play game official');document.getElementById('overlay').classList.add('show');});
-document.getElementById('close').onclick=()=>document.getElementById('overlay').classList.remove('show');document.getElementById('overlay').addEventListener('click',e=>{if(e.target.id==='overlay')e.currentTarget.classList.remove('show')});search.addEventListener('input',render);sort.addEventListener('change',render);render();
-</script></body></html>
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background:
+    radial-gradient(ellipse at 80% 0%, #1e1b4b 0, transparent 38%),
+    var(--bg);
+  color: var(--text);
+  font: 15px/1.45 Inter, ui-sans-serif, system-ui,
+        -apple-system, Segoe UI, sans-serif;
+}
+
+/* HEADER */
+
+header {
+  border-bottom: 1px solid var(--line);
+  position: sticky;
+  top: 0;
+  background: #0b1020ed;
+  backdrop-filter: blur(14px);
+  z-index: 5;
+}
+
+.nav {
+  max-width: 1240px;
+  margin: auto;
+  padding: 18px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.brand {
+  font-weight: 950;
+  letter-spacing: -1.8px;
+  font-size: 25px;
+}
+
+.brand span {
+  color: var(--lime);
+}
+
+.tag {
+  font-size: 11px;
+  color: var(--muted);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+/* HERO */
+
+.hero {
+  max-width: 1240px;
+  margin: auto;
+  padding: 58px 24px 32px;
+  display: grid;
+  grid-template-columns: 1.2fr .8fr;
+  gap: 30px;
+  align-items: end;
+}
+
+.kicker {
+  color: var(--lime);
+  font-size: 11px;
+  letter-spacing: 2.3px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+h1 {
+  font-size: clamp(42px, 7vw, 82px);
+  line-height: .93;
+  letter-spacing: -5px;
+  margin: 15px 0 18px;
+  font-weight: 950;
+}
+
+h1 em {
+  font-style: normal;
+  color: var(--lime);
+}
+
+.hero p {
+  color: #aeb2aa;
+  max-width: 520px;
+  margin: 0;
+  font-size: 16px;
+}
+
+.hero-note {
+  border: 1px solid #383c33;
+  border-radius: 16px;
+  padding: 22px;
+  background: linear-gradient(135deg, #22251e, #151714);
+  min-height: 130px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.hero-note strong {
+  font-size: 29px;
+  letter-spacing: -1px;
+}
+
+.hero-note small {
+  color: var(--muted);
+}
+
+/* SEARCH */
+
+.controls {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 16px 24px 24px;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+input,
+select {
+  background: #121a2b;
+  border: 1px solid #353a31;
+  color: var(--text);
+  padding: 13px 15px;
+  border-radius: 10px;
+  font: inherit;
+  outline: none;
+}
+
+input {
+  flex: 1;
+  min-width: 200px;
+}
+
+input:focus,
+select:focus {
+  border-color: var(--lime);
+}
+
+.count {
+  color: var(--muted);
+  font-size: 13px;
+  margin-left: auto;
+}
+
+/* GAME GRID */
+
+main {
+  max-width: 1240px;
+  margin: auto;
+  padding: 0 24px 60px;
+}
+
+.sectionhead {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 4px 0 18px;
+}
+
+.sectionhead h2 {
+  font-size: 17px;
+  letter-spacing: -.4px;
+  margin: 0;
+}
+
+.sectionhead span {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 13px;
+}
+
+.game {
+  background: var(--panel);
+  border: 1px solid #292c27;
+  border-radius: 13px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform .18s, border-color .18s;
+  min-width: 0;
+}
+
+.game:hover {
+  transform: translateY(-4px);
+  border-color: #737d4b;
+}
+
+.art {
+  height: 132px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  text-align: center;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse at 20% 20%, var(--glow), transparent 60%),
+    linear-gradient(135deg, #252a22, #141613);
+}
+
+.art:before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    135deg,
+    transparent 0 18px,
+    #ffffff05 19px 20px
+  );
+}
+
+.mark {
+  position: relative;
+  font-size: clamp(15px, 1.5vw, 23px);
+  font-weight: 1000;
+  line-height: 1.02;
+  letter-spacing: -1px;
+  text-shadow: 0 3px 20px #000;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+}
+
+.num {
+  position: absolute;
+  top: 10px;
+  left: 11px;
+  font-size: 10px;
+  color: #c9cec2;
+  letter-spacing: 1px;
+}
+
+.platform {
+  position: absolute;
+  bottom: 10px;
+  right: 11px;
+  color: #c9cec2;
+  font-size: 9px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.info {
+  padding: 12px 13px 14px;
+}
+
+.info h3 {
+  margin: 0 0 5px;
+  font-size: 13px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.info p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 11px;
+}
+
+/* FOOTER */
+
+footer {
+  border-top: 1px solid var(--line);
+  padding: 25px 24px;
+  color: #7e837a;
+  font-size: 12px;
+  text-align: center;
+}
+
+/* GAME POPUP */
+
+.overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: #000b;
+  z-index: 10;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.overlay.show {
+  display: flex;
+}
+
+.modal {
+  max-width: 560px;
+  width: 100%;
+  background: #191b18;
+  border: 1px solid #41463a;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 25px 100px #0009;
+}
+
+.modalart {
+  height: 210px;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  padding: 30px;
+  background:
+    radial-gradient(ellipse at 30% 20%, var(--glow), transparent 65%),
+    #20231e;
+}
+
+.modalart b {
+  font-size: clamp(30px, 6vw, 52px);
+  font-weight: 1000;
+  letter-spacing: -2px;
+  line-height: 1;
+}
+
+.modalbody {
+  padding: 23px;
+}
+
+.modalbody h2 {
+  margin: 0 0 6px;
+  font-size: 26px;
+  letter-spacing: -1px;
+}
+
+.modalbody p {
+  color: #aeb2aa;
+}
+
+.actions {
+  display: flex;
+  gap: 9px;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+a,
+.close {
+  text-decoration: none;
+  border: 1px solid #44483e;
+  color: var(--text);
+  padding: 11px 14px;
+  border-radius: 9px;
+  font-weight: 700;
+  font-size: 12px;
+}
+
+a.primary {
+  background: var(--lime);
+  color: #14160e;
+  border-color: var(--lime);
+}
+
+.close {
+  background: transparent;
+  cursor: pointer;
+}
+
+/* FROG MASCOT */
+
+#frog-mascot {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  z-index: 9999;
+
+  width: 210px;
+  max-width: 45vw;
+
+  transform: translate(-50%, 110%);
+  opacity: 0;
+
+  pointer-events: none;
+  visibility: hidden;
+}
+
+#frog-mascot img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+/* Frog appears and disappears */
+
+#frog-mascot.show {
+  visibility: visible;
+  animation: frogPop 4s ease-in-out forwards;
+}
+
+@keyframes frogPop {
+  0% {
+    transform: translate(-50%, 110%);
+    opacity: 0;
+  }
+
+  15% {
+    transform: translate(-50%, 0);
+    opacity: 1;
+  }
+
+  28% {
+    transform: translate(-50%, -5px) rotate(-4deg);
+  }
+
+  40% {
+    transform: translate(-50%, 0) rotate(4deg);
+  }
+
+  52% {
+    transform: translate(-50%, 0) rotate(0deg);
+  }
+
+  78% {
+    transform: translate(-50%, 0);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translate(-50%, 110%);
+    opacity: 0;
+  }
+}
+
+/* MOBILE */
+
+@media (max-width: 950px) {
+  .grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 680px) {
+  .hero {
+    grid-template-columns: 1fr;
+    padding-top: 38px;
+  }
+
+  h1 {
+    letter-spacing: -3px;
+  }
+
+  .hero-note {
+    min-height: 100px;
+  }
+
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .art {
+    height: 125px;
+  }
+
+  .count {
+    width: 100%;
+    margin: 0;
+  }
+
+  .nav {
+    padding: 15px 18px;
+  }
+
+  main,
+  .controls,
+  .hero {
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+
+  #frog-mascot {
+    width: 155px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #frog-mascot.show {
+    animation-duration: 4s;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+
+<header>
+  <div class="nav">
+    <div>
+      <div class="brand">
+        Vortex <span>Gaming(sheru)</span>
+      </div>
+      <div class="tag">Your gaming universe</div>
+    </div>
+  </div>
+</header>
+
+<!-- HERO -->
+
+<section class="hero">
+  <div>
+    <div class="kicker">The game shelf / 2026</div>
+
+    <h1>
+      Less scrolling.<br>
+      <em>More playing.</em>
+    </h1>
+
+    <p>
+      A clean, no-nonsense game directory.
+      Find something to play, check it out,
+      and get straight to the official page.
+    </p>
+  </div>
+
+  <div class="hero-note">
+    <small>THE COLLECTION</small>
+    <strong>200 games. One place.</strong>
+    <small>Search the library and open any title for links.</small>
+  </div>
+</section>
+
+<!-- SEARCH -->
+
+<div class="controls">
+  <input
+    id="search"
+    placeholder="Search games…"
+    aria-label="Search games"
+  >
+
+  <select id="sort">
+    <option value="az">A–Z</option>
+    <option value="za">Z–A</option>
+  </select>
+
+  <span class="count" id="count"></span>
+</div>
+
+<!-- GAMES -->
+
+<main>
+  <div class="sectionhead">
+    <h2>Browse the library</h2>
+    <span>Tap a game for details ↗</span>
+  </div>
+
+  <div class="grid" id="grid"></div>
+</main>
+
+<!-- FOOTER -->
+
+<footer>
+  PLAYROOM is an independent fan-made directory and is not
+  affiliated with any game publisher. Game names and trademarks
+  belong to their respective owners.
+</footer>
+
+<!-- GAME DETAILS POPUP -->
+
+<div class="overlay" id="overlay">
+  <div class="modal">
+
+    <div class="modalart" id="modalart">
+      <b id="modalmark"></b>
+    </div>
+
+    <div class="modalbody">
+      <h2 id="modalname"></h2>
+      <p id="modaldesc"></p>
+
+      <div class="actions">
+        <a
+          class="primary"
+          id="official"
+          target="_blank"
+          rel="noopener"
+        >
+          Find official website ↗
+        </a>
+
+        <a
+          id="play"
+          target="_blank"
+          rel="noopener"
+        >
+          Find where to play ↗
+        </a>
+
+        <button class="close" id="close">
+          Close
+        </button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- FROG MASCOT -->
+
+<div id="frog-mascot" aria-hidden="true">
+  <img src="frog.png" alt="">
+</div>
+
+<script>
+
+/* GAME COLLECTION */
+
+const games = [
+  "Minecraft",
+  "Fortnite",
+  "EA Sports FC 25",
+  "EA Sports FC 24",
+  "FIFA 23",
+  "FIFA 22",
+  "FIFA 21",
+  "FIFA 20",
+  "FIFA 19",
+  "FIFA 18",
+  "Grand Theft Auto V",
+  "Grand Theft Auto: San Andreas",
+  "Red Dead Redemption 2",
+  "The Witcher 3: Wild Hunt",
+  "Elden Ring",
+  "Dark Souls III",
+  "Sekiro: Shadows Die Twice",
+  "Hogwarts Legacy",
+  "Cyberpunk 2077",
+  "The Elder Scrolls V: Skyrim",
+  "Fallout 4",
+  "The Last of Us Part I",
+  "God of War (2018)",
+  "God of War Ragnarök",
+  "Marvel's Spider-Man: Miles Morales",
+  "Horizon Zero Dawn",
+  "Horizon Forbidden West",
+  "Uncharted 4: A Thief's End",
+  "Assassin's Creed Valhalla",
+  "Assassin's Creed Origins",
+  "Far Cry 5",
+  "Far Cry 6",
+  "Rainbow Six Siege",
+  "Call of Duty: Modern Warfare II",
+  "Call of Duty: Warzone",
+  "Call of Duty: Black Ops Cold War",
+  "Counter-Strike 2",
+  "Valorant",
+  "Apex Legends",
+  "Overwatch 2",
+  "Dota 2",
+  "League of Legends",
+  "Rocket League",
+  "Need for Speed Heat",
+  "Forza Horizon 5",
+  "Forza Motorsport",
+  "Gran Turismo 7",
+  "Mario Kart 8 Deluxe",
+  "Super Mario Odyssey",
+  "Super Mario Bros. Wonder",
+  "The Legend of Zelda: Breath of the Wild",
+  "The Legend of Zelda: Tears of the Kingdom",
+  "Animal Crossing: New Horizons",
+  "Stardew Valley",
+  "The Sims 4",
+  "Terraria",
+  "Roblox",
+  "Among Us",
+  "Fall Guys",
+  "Overcooked! 2",
+  "It Takes Two",
+  "Portal 2",
+  "Portal",
+  "Half-Life 2",
+  "Doom Eternal",
+  "Resident Evil 4",
+  "Resident Evil Village",
+  "Silent Hill 2",
+  "Dead by Daylight",
+  "Phasmophobia",
+  "Subnautica",
+  "The Forest",
+  "Sons of the Forest",
+  "ARK: Survival Evolved",
+  "Rust",
+  "Sea of Thieves",
+  "Baldur's Gate 3",
+  "Diablo IV",
+  "Path of Exile",
+  "Genshin Impact",
+  "Honkai: Star Rail",
+  "Final Fantasy VII Remake Intergrade",
+  "Final Fantasy XVI",
+  "Persona 5 Royal",
+  "Monster Hunter: World",
+  "Street Fighter 6",
+  "Tekken 8",
+  "Mortal Kombat 1",
+  "Super Smash Bros. Ultimate",
+  "Cuphead",
+  "Hollow Knight",
+  "Celeste",
+  "Hades",
+  "Dead Cells",
+  "Slay the Spire",
+  "Civilization VI",
+  "Age of Empires II: Definitive Edition",
+  "Plants vs. Zombies",
+  "Clash of Clans",
+  "Candy Crush Saga",
+  "Tetris Effect: Connected",
+  "The Witness",
+  "Chess Ultra",
+  "Papers, Please",
+  "Euro Truck Simulator 2",
+  "Microsoft Flight Simulator",
+  "PowerWash Simulator",
+  "WWE 2K24",
+  "NBA 2K25",
+  "Madden NFL 25",
+  "PGA Tour 2K23",
+  "Tony Hawk's Pro Skater",
+  "Don't Starve Together",
+  "Grounded",
+  "Valheim",
+  "The Long Dark",
+  "Project Zomboid",
+  "7 Days to Die",
+  "House Flipper",
+  "Farming Simulator 22",
+  "Car Mechanic Simulator 2021",
+  "Unpacking",
+  "Human: Fall Flat",
+  "The Talos Principle",
+  "Baba Is You",
+  "Keep Talking and Nobody Explodes",
+  "Jackbox Party Pack 10",
+  "Golf With Your Friends",
+  "Puyo Puyo Tetris 2",
+  "Plants vs. Zombies: Garden Warfare 2"
+];
+
+/* COLORS */
+
+const colors = [
+  "#a78bfa",
+  "#38bdf8",
+  "#f472b6",
+  "#fbbf24",
+  "#34d399",
+  "#fb7185",
+  "#818cf8"
+];
+
+/* GAME DESCRIPTIONS */
+
+function gameLine(g) {
+  const low = g.toLowerCase();
+
+  const lines = [
+    [/roblox/, "Build worlds, discover experiences, and play with friends."],
+    [/minecraft/, "Mine, craft, explore, and make the world your own."],
+    [/fortnite/, "Drop in, gear up, and chase that Victory Royale."],
+    [/grand theft auto|\bgta\b/, "Explore an open world packed with missions and mayhem."],
+    [/call of duty|\bcod\b/, "Jump into action, sharpen your aim, and play the objective."],
+    [/among us/, "Read the room, finish tasks, and figure out who's sus."],
+    [/rocket league/, "Boost, fly, and send the ball into the net."],
+    [/valorant/, "Team tactics, precise aim, and clutch-round energy."],
+    [/league of legends/, "Pick your champion, work with your team, and push the lanes."],
+    [/apex legends/, "Squad up, loot smart, and fight to be the last team standing."],
+    [/stardew/, "Slow down, grow your farm, and make a little life."],
+    [/the sims/, "Create characters, shape their stories, and build a home."],
+    [/overwatch/, "Choose a hero, coordinate with your team, and make the play."],
+    [/terraria/, "Dig deep, craft gear, and see what waits beyond the next cave."],
+    [/fall guys/, "Race through chaotic courses and try not to tumble."]
+  ];
+
+  for (const [re, txt] of lines) {
+    if (re.test(low)) return txt;
+  }
+
+  const options = [
+    "Discover its world, learn the rhythm, and make your own run.",
+    "Jump in, explore the mechanics, and see how far you can go.",
+    "A new challenge to master—and a new favorite waiting to happen.",
+    "Pick your style, find your flow, and enjoy the adventure."
+  ];
+
+  return options[(g.length + g.charCodeAt(0)) % options.length];
+}
+
+/* GAME GRID RENDERING */
+
+const grid = document.getElementById("grid");
+const search = document.getElementById("search");
+const sort = document.getElementById("sort");
+const count = document.getElementById("count");
+
+function render() {
+  const q = search.value.toLowerCase();
+
+  let list = games
+    .filter(g => g.toLowerCase().includes(q))
+    .sort((a, b) => a.localeCompare(b));
+
+  if (sort.value === "za") {
+    list.reverse();
+  }
+
+  count.textContent = list.length + " titles";
+
+  grid.innerHTML = list.map(g => {
+    const i = games.indexOf(g);
+    const c = colors[i % colors.length];
+
+    return `
+      <article
+        class="game"
+        data-name="${g.replaceAll("&", "&amp;").replaceAll('"', "&quot;")}"
+        style="--glow:${c}"
+      >
+        <div class="art">
+          <span class="num">${String(i + 1).padStart(3, "0")}</span>
+          <div class="mark">${g}</div>
+          <span class="platform">GAME FILE</span>
+        </div>
+
+        <div class="info">
+          <h3>${g}</h3>
+          <p>${gameLine(g)}</p>
+        </div>
+      </article>
+    `;
+  }).join("");
+}
+
+/* GAME DETAILS */
+
+grid.addEventListener("click", e => {
+  const card = e.target.closest(".game");
+
+  if (!card) return;
+
+  const g = card.dataset.name;
+
+  document.getElementById("modalname").textContent = g;
+  document.getElementById("modaldesc").textContent = gameLine(g);
+  document.getElementById("modalmark").textContent = g;
+
+  document.getElementById("official").href =
+    "https://www.google.com/search?q=" +
+    encodeURIComponent(g + " official website");
+
+  document.getElementById("play").href =
+    "https://www.google.com/search?q=" +
+    encodeURIComponent(g + " play game official");
+
+  document.getElementById("overlay").classList.add("show");
+});
+
+/* CLOSE GAME POPUP */
+
+document.getElementById("close").onclick = () => {
+  document.getElementById("overlay").classList.remove("show");
+};
+
+document.getElementById("overlay").addEventListener("click", e => {
+  if (e.target.id === "overlay") {
+    e.currentTarget.classList.remove("show");
+  }
+});
+
+/* SEARCH AND SORT */
+
+search.addEventListener("input", render);
+sort.addEventListener("change", render);
+
+/* FROG MASCOT ANIMATION */
+
+const frog = document.getElementById("frog-mascot");
+
+function showFrog() {
+  frog.classList.remove("show");
+
+  // Restart the animation cleanly
+  void frog.offsetWidth;
+
+  frog.classList.add("show");
+}
+
+// Wait 10 seconds before the first appearance
+setInterval(showFrog, 10000);
+
+// Render the games
+render();
+
+</script>
+</body>
+</html>
+
+
+ 
+ 
+
+ 
